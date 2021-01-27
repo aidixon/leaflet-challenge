@@ -1,6 +1,3 @@
-// Url 
-
-
 // Basic map layer
 var myMap = L.map("mapid", {
     center: [38, -120.16],
@@ -23,7 +20,15 @@ var earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/
 d3.json(earthquakeData, function(response) {
     console.log(response);
 
+    // Create marker cluster group
+    var markers = L.markerClusterGroup();
 
+    // Loop through the data
+    for (var i = 0; i < response.length; i++) {
+
+        // Set variable
+        var geometry = response[i].geometry;
+
+        //
+    }
 });
-
-
