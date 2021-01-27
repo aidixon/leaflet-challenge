@@ -20,15 +20,18 @@ var earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/
 d3.json(earthquakeData, function(response) {
     console.log(response);
 
-    // Create marker cluster group
-    var markers = L.markerClusterGroup();
+    // Extract geometry from the data
+    var geometry = response.features.geometry;
 
-    // Loop through the data
-    for (var i = 0; i < response.length; i++) {
+    // Create variable for title
+    var earthquake_title = response.features.properties;
 
-        // Set variable
-        var geometry = response[i].geometry;
-
-        //
+    // Create an array for the data
+    for (var i = 0; i < geometry.length; i++) {
+        var geometry_coord = geometry[i];
+        
+        // Create a marker for each coord
+        var geomarker = L.marker([geometry_coord[1], geometry_coord[0]])
+        .bindPopup("<h3>" + earthquake_title.title + "</h3>")
     }
 });
