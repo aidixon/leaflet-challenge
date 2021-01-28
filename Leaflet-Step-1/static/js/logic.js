@@ -1,6 +1,6 @@
 // Basic map layer
 var myMap = L.map("mapid", {
-    center: [38, -120.16],
+    center: [32.750, -115.833],
     zoom: 7
 });
 
@@ -13,6 +13,11 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: API_KEY
 }).addTo(myMap);
 
+// Add a basic marker
+var marker = L.marker([32.750, -115.833], {
+    draggable: true,
+    title: "M 1.8 - 15km E of Ocotillo, CA"
+}).addTo(myMap);
 // Variable for the json link
 var earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
@@ -20,18 +25,9 @@ var earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/
 d3.json(earthquakeData, function(response) {
     console.log(response);
 
-    // Extract geometry from the data
-    var geometry = response.features.geometry;
-
-    // Create variable for title
-    var earthquake_title = response.features.properties;
-
-    // Create an array for the data
-    for (var i = 0; i < geometry.length; i++) {
-        var geometry_coord = geometry[i];
-        
-        // Create a marker for each coord
-        var geomarker = L.marker([geometry_coord[1], geometry_coord[0]])
-        .bindPopup("<h3>" + earthquake_title.title + "</h3>")
-    }
+    // Extract magnitude from the data
+ 
 });
+
+// features, then geometry, then coordinates
+// also features then magnitude
